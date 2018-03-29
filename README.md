@@ -17,50 +17,50 @@ public void ConfigureServices(IServiceCollection services)
 
 public class Person
 {
-	public string Name { get; set; }
+    public string Name { get; set; }
 }
 
 using DynamicRazor;
 public SampleController : Controller
 {
-	private DynamicRazorEngine _dynamicRazorEngine;
+    private DynamicRazorEngine _dynamicRazorEngine;
 
-	public RazorController(DynamicRazorEngine dynamicRazorEngine)
-	{
-		_dynamicRazorEngine = dynamicRazorEngine;
-	}
-
-	[HttpGet]
-	public async Task<IActionResult> Get()
+    public RazorController(DynamicRazorEngine dynamicRazorEngine)
     {
-		var project = GetDefaultProject();
+        _dynamicRazorEngine = dynamicRazorEngine;
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Get()
+    {
+        var project = GetDefaultProject();
         project.AddStringItem("View.cshtml", GetViewText());
 
         var model = new Person();
-		model.Name = "Bob";
+        model.Name = "Bob";
 
-		var html = await _dynamicRazorEngine.CompileRenderAsync(project, "View.cshtml", model);
+        var html = await _dynamicRazorEngine.CompileRenderAsync(project, "View.cshtml", model);
 
-		return new ContentResult
+        return new ContentResult
         {
-			ContentType = "text/html",
+            ContentType = "text/html",
             Content = html,
             StatusCode = 200
-		};
-	}
+        };
+    }
 
-	private DynamicRazorProject GetDefaultProject()
+    private DynamicRazorProject GetDefaultProject()
 	{
-		var project = new DynamicRazorProject();
+        var project = new DynamicRazorProject();
         project.AddStringItem("_ViewStart.cshtml", GetViewStartText()); //Option
         project.AddStringItem("_ViewImports.cshtml", GetViewImportsText()); //Option
         project.AddStringItem("_Layout.cshtml", GetLayoutText()); //Option
 
-		return project;
-	}
-	private string GetViewText()
+        return project;
+    }
+    private string GetViewText()
     {
-		var sb = new StringBuilder();
+        var sb = new StringBuilder();
 
         sb.AppendLine("@model SampleApp.Models.Person");
         sb.AppendLine("<div>");
@@ -68,29 +68,29 @@ public SampleController : Controller
         sb.AppendLine("</div>");
 
         return sb.ToString();
-	}
+    }
     private string GetViewStartText()
     {
-		var sb = new StringBuilder();
+        var sb = new StringBuilder();
         sb.AppendLine("@{");
         sb.AppendLine("Layout = \"_Layout\";");
         sb.AppendLine("}");
 
-		return sb.ToString();
-	}
+        return sb.ToString();
+    }
     private string GetViewImportsText()
     {
-		var sb = new StringBuilder();
+        var sb = new StringBuilder();
 
         sb.AppendLine("@using SampleApp");
         sb.AppendLine("@namespace SampleApp.Pages");
         sb.AppendLine("@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers");
 
         return sb.ToString();
-	}
+    }
     private string GetLayoutText()
     {
-		var sb = new StringBuilder();
+        var sb = new StringBuilder();
         sb.AppendLine("<!DOCTYPE html>");
         sb.AppendLine("<html>");
         sb.AppendLine("<head>");
@@ -104,6 +104,6 @@ public SampleController : Controller
         sb.AppendLine("</html>");
 
         return sb.ToString();
-	}
+    }
 }
 ```
