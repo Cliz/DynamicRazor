@@ -6,22 +6,21 @@ Use Razor to build templates from Strings or EmbeddedResources or Files.
 
 ## Startup.cs
 
-```csharp
+```c#
 public void ConfigureServices(IServiceCollection services)
 {
     services.AddDynamicRazor();
 }
 ```
 ## Sample use cases
-```csharp
-
+```c#
 public class Person
 {
     public string Name { get; set; }
 }
 
 using DynamicRazor;
-public SampleController : Controller
+public class SampleController : Controller
 {
     private DynamicRazorEngine _dynamicRazorEngine;
 
