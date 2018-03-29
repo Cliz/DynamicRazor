@@ -3,3 +3,5 @@
 ################################################################################
 
 /.vs/DynamicRazor/v15/Server/sqlite3
+/src/DynamicRazor/bin/Debug/netstandard2.0
+/src/DynamicRazor/obj
