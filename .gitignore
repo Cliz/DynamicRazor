@@ -5,3 +5,6 @@
 /.vs/DynamicRazor/v15/Server/sqlite3
 /src/DynamicRazor/bin/Debug/netstandard2.0
 /src/DynamicRazor/obj
+/.vs
+/samples/SampleApp/bin/Debug/netcoreapp2.0
+/samples/SampleApp/obj
